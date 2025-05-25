@@ -1,0 +1,7 @@
+notebooks/
+data/
+.git/
+.venv/
+.coverage
+.env
+.DS_Store
