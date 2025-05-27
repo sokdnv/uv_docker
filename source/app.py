@@ -30,11 +30,20 @@ app = FastAPI(lifespan=lifespan)
 
 @app.get('/')
 async def return_info() -> RedirectResponse:
+    """
+    Корневой эндпоинт, перенаправляющий на /docs
+    :return:
+    """
     return RedirectResponse(url='/docs')
 
 
 @app.post('/pred')
 async def pred(data: ModelInput):
+    """
+    Эндпоинт для получения предсказания модели.
+    Принимает post запрос с json файлом с указанным в example форматом.
+    Пример удачного ответа можно увидеть в Responses: 200
+    """
     df = pd.DataFrame([data.model_dump()])
     prediction = predict(model=model, df=df)
     return ModelOutput(label=prediction[0])
